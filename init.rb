@@ -1,2 +1,2 @@
-Paperclip::ClassMethods.send(:extend, PaperclipValidations)
+Paperclip::ClassMethods.send(:include, PaperclipValidations)
 
