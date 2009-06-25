@@ -7,7 +7,7 @@ module Paperclip
     #
     def validates_ratio_of name, options={}
       attachment_definitions[name][:validations][:dimensions] = lambda do |attachment, instance|
-        path = instance.image.queued_for_write[:original]
+        path = instance.send(name).queued_for_write[:original]
         if path
           dimensions       = Paperclip::Geometry.from_file path
           ratio_dimensions = [dimensions.width, dimensions.height].sort.reverse
@@ -30,7 +30,7 @@ module Paperclip
     #
     def validates_dimensions_of name, options = {}
       attachment_definitions[name][:validations][:dimensions] = lambda do |attachment, instance|
-        path = instance.image.queued_for_write[:original]
+        path = instance.send(name).queued_for_write[:original]
         if path
           dimensions = Paperclip::Geometry.from_file path
           message    = options[:message] || "dimensions must be #{options[:width]}px wide by #{options[:height]}px tall"
