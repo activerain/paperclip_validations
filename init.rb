@@ -1,2 +1,2 @@
-require File.join(__FILE__, 'lib', 'paperclip_validations')
+require File.join(File.dirname(__FILE__), 'lib', 'paperclip_validations')
 
