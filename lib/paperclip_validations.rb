@@ -5,14 +5,14 @@ module PaperclipValidations
   #   validates_ratio_of :image, :with => (1.0)..(1.78)
   #
   def validates_ratio_of name, options={}
-    attachment_definitions[name][:validations][:dimensions] = lambda do |attachment, instance|
+    attachment_definitions[name][:validations][:ratio] = lambda do |attachment, instance|
       path = instance.send(name).queued_for_write[:original]
       if path
         dimensions       = Paperclip::Geometry.from_file path
         ratio_dimensions = [dimensions.width, dimensions.height].sort.reverse
         ratio            = ratio_dimensions.first / ratio_dimensions.last.to_f
 
-        message = options[:message] || "ratio must be #{options[:width].first} to #{options[:width].second}"
+        message = options[:message] || "ratio must be #{options[:with].first} to #{options[:with].last}"
         message unless options[:with].include? ratio
       end
     end
