@@ -16,7 +16,7 @@ module Paperclip
         dimensions = Paperclip::Geometry.from_file @queued_for_write[:original]
         message    = options[:message] || "dimensions must be #{options[:width]}px wide by #{options[:height]}px tall"
 
-        message unless (options[:width].present? and options[:width] === dimensions.width) or
+        message unless (options[:width].present? and options[:width] === dimensions.width) and
         (options[:height].present? and options[:height] === dimensions.height)
       end
     end
